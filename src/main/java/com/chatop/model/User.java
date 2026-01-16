@@ -1,12 +1,15 @@
 package com.chatop.model;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "USERS")
@@ -14,24 +17,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Le nom est obligatoire")
-    @Size(max = 255)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String name;
 
-    @NotBlank(message = "L'email est obligatoire")
-    @Email(message = "Format d'email invalide")
-    @Size(max = 255)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false,length = 255)
     private String email;
 
-    @NotBlank(message = "Le mot de passe est obligatoire")
-    @Size(min = 6, message = "Le mot de passe doit contenir au moins 6 caractères")
     @Column(nullable = false)
     private String password;
 
@@ -40,5 +36,71 @@ public class User {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    // =========================================================================
+    // IMPLÉMENTATION DE UserDetails (requis par Spring Security)
+    // =========================================================================
+
+    /**
+     * Retourne les rôles/permissions de l'utilisateur
+     * Pour l'instant, on retourne une liste vide (pas de gestion de rôles)
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Retourne le "username" utilisé pour l'authentification
+     * Dans notre cas, c'est l'EMAIL qui sert d'identifiant
+     */
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    /**
+     * Le compte n'est jamais expiré
+     */
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    /**
+     * Le compte n'est jamais verrouillé
+     */
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    /**
+     * Les credentials ne sont jamais expirées
+     */
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    /**
+     * Le compte est toujours activé
+     */
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    /**
+     * Getter pour password
+     * Lombok génère déjà getPassword() via @Data,
+     * mais UserDetails l'exige aussi, donc c'est compatible
+     */
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+
 }
 
