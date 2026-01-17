@@ -2,7 +2,7 @@
 
 API REST sécurisée pour la gestion de locations immobilières, développée avec Spring Boot 3, Spring Security et authentification JWT.
 
-## 🛠 Technologies utilisées
+## Technologies utilisées
 
 - **Java 17**
 - **Spring Boot 3.2.x**
@@ -16,7 +16,7 @@ API REST sécurisée pour la gestion de locations immobilières, développée av
 
 ---
 
-## 📦 Prérequis
+##  Prérequis
 
 Avant de commencer, assurez-vous d'avoir installé :
 
@@ -42,7 +42,7 @@ Avant de commencer, assurez-vous d'avoir installé :
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### 1. Cloner le projet
 
@@ -113,27 +113,7 @@ exit;
 
 ### 4. Compilation et lancement
 
-**Option 1 : Avec Maven wrapper (recommandé)**
-
-```bash
-# Nettoyer et compiler
-./mvnw clean install
-
-# Lancer l'application
-./mvnw spring-boot:run
-```
-
-**Option 2 : Avec Maven installé globalement**
-
-```bash
-# Nettoyer et compiler
-mvn clean install
-
-# Lancer l'application
-mvn spring-boot:run
-```
-
-**Option 3 : Depuis IntelliJ IDEA**
+ Depuis IntelliJ IDEA**
 
 1. Ouvrez le projet dans IntelliJ
 2. Attendez que Maven télécharge les dépendances
