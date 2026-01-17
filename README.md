@@ -1,31 +1,31 @@
-# ChâTop - API Backend Spring Boot
+# ChâTop - Spring Boot Backend API
 
-API REST sécurisée pour la gestion de locations immobilières, développée avec Spring Boot 3, Spring Security et authentification JWT.
+Secure REST API for rental property management, developed with Spring Boot 3, Spring Security and JWT authentication.
 
-## Technologies utilisées
+## Technologies Used
 
 - **Java 17**
 - **Spring Boot 3.2.x**
-- **Spring Security** avec authentification JWT
+- **Spring Security** with JWT authentication
 - **Spring Data JPA** (Hibernate)
 - **MySQL 8.0+**
-- **Lombok** pour la réduction du code boilerplate
+- **Lombok** for boilerplate code reduction
 - **SpringDoc OpenAPI 3** (Swagger UI)
-- **BCrypt** pour le hashage des mots de passe
-- **Maven** pour la gestion des dépendances
+- **BCrypt** for password hashing
+- **Maven** for dependency management
 
 ---
 
-##  Prérequis
+## Prerequisites
 
-Avant de commencer, assurez-vous d'avoir installé :
+Before starting, make sure you have installed:
 
-- **Java JDK 17** ou supérieur
+- **Java JDK 17** or higher
   ```bash
   java -version
   ```
 
-- **Maven 3.6+** (ou utilisez le wrapper Maven inclus `./mvnw`)
+- **Maven 3.6+** (or use the included Maven wrapper `./mvnw`)
   ```bash
   mvn -version
   ```
@@ -44,86 +44,86 @@ Avant de commencer, assurez-vous d'avoir installé :
 
 ## Installation
 
-### 1. Cloner le projet
+### 1. Clone the project
 
 ```bash
-git clone https://github.com/votre-username/chatop.git
+git clone https://github.com/your-username/chatop.git
 cd chatop
 ```
 
 ---
 
-### 2. Installation de la base de données MySQL
+### 2. MySQL Database Installation
 
-#### Option A : Via la ligne de commande
+#### Option A: Via command line
 
-**Étape 1 : Démarrer MySQL**
+**Step 1: Start MySQL**
 
-Sur macOS :
+On macOS:
 ```bash
 # Via Homebrew
 brew services start mysql
 
-# Ou via les Préférences Système
-# Préférences Système > MySQL > Start MySQL Server
+# Or via System Preferences
+# System Preferences > MySQL > Start MySQL Server
 
-# Ou manuellement
+# Or manually
 sudo /usr/local/mysql/support-files/mysql.server start
 ```
 
-Sur Linux :
+On Linux:
 ```bash
 sudo systemctl start mysql
 ```
 
-Sur Windows :
+On Windows:
 ```bash
-# Via les Services Windows ou
+# Via Windows Services or
 net start MySQL80
 ```
 
-**Étape 2 : Se connecter à MySQL**
+**Step 2: Connect to MySQL**
 
 ```bash
 mysql -u root -p
 ```
-*Entrez votre mot de passe MySQL root*
+*Enter your MySQL root password*
 
-**Étape 3 : Créer la base de données**
+**Step 3: Create the database**
 
 ```sql
--- Créer la base de données
+-- Create the database
 CREATE DATABASE IF NOT EXISTS chatop 
 CHARACTER SET utf8mb4 
 COLLATE utf8mb4_unicode_ci;
 
--- Vérifier que la base est créée
+-- Verify the database is created
 SHOW DATABASES;
 
--- Utiliser la base de données
+-- Use the database
 USE chatop;
 
--- Quitter MySQL
+-- Exit MySQL
 exit;
 ```
 
-**Note importante** : Les tables seront créées automatiquement au premier lancement de l'application grâce à Hibernate (`spring.jpa.hibernate.ddl-auto=update`).
+**Important note**: Tables will be created automatically on first application launch thanks to Hibernate (`spring.jpa.hibernate.ddl-auto=update`).
 
 ---
 
-### 4. Compilation et lancement
+### 4. Compilation and Launch
 
- Depuis IntelliJ IDEA**
+**From IntelliJ IDEA**
 
-1. Ouvrez le projet dans IntelliJ
-2. Attendez que Maven télécharge les dépendances
-3. Cliquez sur le bouton (Run) ou utilisez `Shift + F10`
+1. Open the project in IntelliJ
+2. Wait for Maven to download dependencies
+3. Click the  (Run) button or use `Shift + F10`
 
 ---
 
-**Vérification du démarrage réussi** 
+**Successful startup verification** 
 
-Si l'application démarre correctement, vous devriez voir dans les logs :
+If the application starts correctly, you should see in the logs:
 
 ```
 INFO  c.c.a.ChatopApplication - Started ChatopApplication in X.XXX seconds
@@ -132,27 +132,27 @@ INFO  o.h.boot.model.process.spi.Scanner - HHH000412: Hibernate Core
 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed
 ```
 
-L'application est maintenant accessible sur : **http://localhost:3001**
+The application is now accessible at: **http://localhost:3001**
 
 ---
 
-## Documentation de l'API
+## API Documentation
 
-### Accéder à Swagger UI
+### Access Swagger UI
 
-Une fois l'application lancée, la documentation interactive de l'API est disponible à l'adresse :
+Once the application is launched, the interactive API documentation is available at:
 
 **🔗 [http://localhost:3001/swagger-ui.html](http://localhost:3001/swagger-ui.html)**
 
-Vous pouvez également accéder à la documentation au format JSON :
+You can also access the documentation in JSON format:
 
 **🔗 [http://localhost:3001/api-docs](http://localhost:3001/api-docs)**
 
+**To test protected routes via Swagger:**
 
-**Pour tester les routes protégées via swagger :**
-1. Inscrivez-vous ou connectez-vous via `/api/auth/register` ou `/api/auth/login`
-2. Copiez le token JWT retourné
-3. Cliquez sur le bouton **"Authorize"**  en haut à droite
-4. Collez le token (sans "Bearer") dans le champ
-5. Cliquez sur **"Authorize"**
-6. Testez les routes protégées !
+1. Sign up or log in via `/api/auth/register` or `/api/auth/login`
+2. Copy the returned JWT token
+3. Click the **"Authorize"** button in the top right
+4. Paste the token (without "Bearer") in the field
+5. Click **"Authorize"**
+6. Test the protected routes!
